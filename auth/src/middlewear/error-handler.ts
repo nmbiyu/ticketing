@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction } from "express";
+import { RequestValidationError } from "../errors/request-validation-error";
+import { DatabaseConnectionError } from "../errors/database-connection-error";
 
 /**
  * Express error handler. Express will register a function as an error handler if it has four parameters. See docs.
@@ -10,8 +12,14 @@ import { Request, Response, NextFunction } from "express";
  * @param {NextFunction} next
  */
 export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.log('Something went wrong', err);
+    if (err instanceof RequestValidationError) {
+        const formattedErrors = err.errors.map(error => ({ message: error.msg, field: error.param }));
+        return res.status(400).send({ errors: formattedErrors });
+    } else if (err instanceof DatabaseConnectionError) {
+        res.status(500).send({ errors: [{ message: err.reason }]});
+        console.log('handling this error as a database connection error');
+    }
     res.status(400).send({
-        message: err.message
+        errors: [{ message: 'Something went wrong.' }]
     });
 };
