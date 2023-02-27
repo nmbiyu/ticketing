@@ -5,8 +5,10 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
+# Local build config for the minikube context.
 #  local:
 #    push: false
+# Google Cloud config for the gCloud context.
   googleCloudBuild:
     projectId: ticketing-dev-379109
   artifacts:
