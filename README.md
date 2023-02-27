@@ -35,6 +35,7 @@ The app can be deployed in either the local minikube context or in the Google Cl
 ### Google cloud context
 
 To use the Google Cloud context:
+
 * Initialise the Google Cloud CLI if this has not been done.
   * `gcloud init`.
 * Log into Google Cloud:
