@@ -1,0 +1,21 @@
+#!/bin/bash
+context=$1
+
+if [ -z $context ]
+then
+  echo "Please provide context. Allowed values are 'gcp' and 'minikube'"
+else
+  if [ "$context" = minikube ]
+  then
+    echo "Setting context to minikube. Updating infra/k8s/*.yaml."
+    sed -i 's/us.gcr.io\/ticketing-dev-379109/nmbiyu/g' skaffold.yaml
+    find infra -iwholename '**/*.yaml' -exec sed -i 's/us.gcr.io\/ticketing-dev-379109/nmbiyu/g' {} +
+  elif [ "$context" = gcp ]
+  then
+    echo "Setting context to gcp. Updating infra/k8s/*.yaml."
+    sed -i 's/nmbiyu/us.gcr.io\/ticketing-dev-379109/g' skaffold.yaml
+    find infra -iwholename '**/*.yaml' -exec sed -i 's/nmbiyu/us.gcr.io\/ticketing-dev-379109/g' {} +
+  else
+    echo "Invalid context $context. Allowed values are 'gcp' and 'minikube'"
+  fi
+fi

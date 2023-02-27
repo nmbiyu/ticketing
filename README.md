@@ -30,7 +30,8 @@ The app can be deployed in either the local minikube context or in the Google Cl
 * Update `skaffold.yaml` to use the local build config.
   * Use the local build config and comment out the googleCloudBuild config.
   * Update all image names to use the naming convention 'nmbiyu/<serviceName>', e.g 'nmbiyu/auth'.
-    This should be done in the deployment files as well.
+    This should be done in the deployment files as well. Run the following command to update the deployment files.
+    * `./configure-deployment-context minikube`
 
 ### Google cloud context
 
@@ -54,7 +55,9 @@ To use the Google Cloud context:
   * Use the local build config and comment out the googleCloudBuild config.
   * Update all image names to use the naming convention 'us.gcr.io/ticketing-dev-379109/<serviceName>', e.g 'us.gcr.io/ticketing-dev-379109/auth'.
     This should be done in the deployment files as well. ticketing-dev-379109 is the cluster ID in Google Cloud.
-    It may change if we destroy the cluster and create it afresh.
+    It may change if we destroy the cluster and create it afresh. Run the following command to update the deployment
+    files.
+    * `./configure-deployment-context gcp`
 
 ## Running the application
 
