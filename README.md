@@ -52,7 +52,7 @@ To use the Google Cloud context:
     * Add the following to `/etc/hosts`: `<IP> ticketing.dev`
 * Update `skaffold.yaml` to use the gCloud build config.
   * Use the local build config and comment out the googleCloudBuild config.
-  * Update all image names to use the naming convention 'us.gcr.io/ticketing-dev-379109/<serviceName>', e.g 'nmbiyu/auth'.
+  * Update all image names to use the naming convention 'us.gcr.io/ticketing-dev-379109/<serviceName>', e.g 'us.gcr.io/ticketing-dev-379109/auth'.
     This should be done in the deployment files as well. ticketing-dev-379109 is the cluster ID in Google Cloud.
     It may change if we destroy the cluster and create it afresh.
 
