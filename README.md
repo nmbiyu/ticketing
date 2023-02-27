@@ -18,3 +18,4 @@ The following should be installed in the local development environment.
 * Once complete, get minikube's IP using `minikube ip`.
 * Add the following configuration to `/etc/hosts`. `<IP> posts.com`. This will direct all requests to posts.com to minikube.
 * Navigate to the root of the project and run `skaffold dev`.
+* A test API can be accessed at http://ticketing.dev/api/users/currentuser.
