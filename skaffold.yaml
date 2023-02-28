@@ -6,13 +6,13 @@ deploy:
       - ./infra/k8s/*
 build:
 # Local build config for the minikube context.
-#  local:
-#    push: false
+  local:
+    push: false
 # Google Cloud config for the gCloud context.
-  googleCloudBuild:
-    projectId: ticketing-dev-379109
+#  googleCloudBuild:
+#    projectId: ticketing-dev-379109
   artifacts:
-    - image: us.gcr.io/ticketing-dev-379109/auth
+    - image: nmbiyu/auth
       context: auth
       docker:
         dockerfile: Dockerfile
