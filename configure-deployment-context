@@ -18,4 +18,5 @@ else
   else
     echo "Invalid context $context. Allowed values are 'gcp' and 'minikube'"
   fi
+  echo "Please update the build sectin of skaffold.yaml. Happy coding!"
 fi
