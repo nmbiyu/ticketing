@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
+import { CustomError } from "../errors/custom-error";
 
 /**
  * Express error handler. Express will register a function as an error handler if it has four parameters. See docs.
@@ -12,13 +11,10 @@ import { DatabaseConnectionError } from "../errors/database-connection-error";
  * @param {NextFunction} next
  */
 export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
-    if (err instanceof RequestValidationError) {
-        console.log('handling this error as a request validation error');
-        return res.status(err.statusCode).send({ errors: err.serializeErrors() });
-    } else if (err instanceof DatabaseConnectionError) {
-        console.log('handling this error as a database connection error');
+    if (err instanceof CustomError) {
         return res.status(err.statusCode).send({ errors: err.serializeErrors() });
     }
+
     return res.status(400).send({
         errors: [{ message: 'Something went wrong.' }]
     });
