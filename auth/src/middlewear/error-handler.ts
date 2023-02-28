@@ -16,10 +16,10 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
         const formattedErrors = err.errors.map(error => ({ message: error.msg, field: error.param }));
         return res.status(400).send({ errors: formattedErrors });
     } else if (err instanceof DatabaseConnectionError) {
-        res.status(500).send({ errors: [{ message: err.reason }]});
         console.log('handling this error as a database connection error');
+        return res.status(500).send({ errors: [{ message: err.reason }]});
     }
-    res.status(400).send({
+    return res.status(400).send({
         errors: [{ message: 'Something went wrong.' }]
     });
 };
