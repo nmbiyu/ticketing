@@ -9,8 +9,8 @@ build:
   local:
     push: false
 # Google Cloud config for the gCloud context.
-#  googleCloudBuild:
-#    projectId: ticketing-dev-379109
+  #googleCloudBuild:
+    #projectId: ticketing-dev-379109
   artifacts:
     - image: nmbiyu/auth
       context: auth
