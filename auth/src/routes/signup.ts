@@ -34,10 +34,15 @@ router.post('/api/users/signup', [
     await user.save();
 
     // Generate JWT
+    // JWT Secret has been created in Kubernetes with the following command.
+    // kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
+    // kubectl get secrets can be used to list the secrets.
+    // We do not want to have a config file for this as it would expose the key.
     const userJwt = jwt.sign({
         id: user.id,
         email: user.email
-    }, 'asdf'); // We'll come back to the secretOrPrivateKey.
+    }, process.env.JWT_KEY!); // The ! tells TypeScript that we have checked the type of process.env.JWT_KEY.
+                              // See check at index.ts#start
 
     // Store it on session object
     req.session = {
