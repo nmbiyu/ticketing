@@ -14,7 +14,7 @@ app.set('trust proxy', true); // Ingress nginx is our proxy. We need to tell Exp
 app.use(json());
 app.use(cookieSession({
     signed: false,
-    secure: true
+    secure: process.env.NODE_ENV !== 'test'
 }));
 
 app.use(currentUserRouter);
