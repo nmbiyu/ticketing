@@ -1,7 +1,7 @@
 #!/bin/bash
 context=$1
 
-if [ -z $context ]
+if [ -z "$context" ]
 then
   echo "Please provide context. Allowed values are 'gcp' and 'minikube'"
 else
