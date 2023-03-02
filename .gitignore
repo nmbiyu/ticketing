@@ -46,3 +46,4 @@ lib/geo/util/map*.html
 
 # Generated docs
 doc/generated/**
+**/.next
