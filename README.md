@@ -15,7 +15,9 @@ The following should be installed in the local development environment.
 
 ## Kubernetes contexts
 
-The app can be deployed in either the local minikube context or in the Google Cloud Kubernetes cluster.
+The app can be deployed in either the local minikube context or in the Google Cloud Kubernetes cluster. Here are some
+valuable context related commands.
+* `kubectl config get-contexts`
 
 ### Minikube context
 
@@ -36,11 +38,14 @@ The app can be deployed in either the local minikube context or in the Google Cl
 ### Google cloud context
 
 To use the Google Cloud context:
-
+* Install the gcloud CLI. https://cloud.google.com/sdk/docs/install
+* Create a Kubernetes cluster in Google Cloud.
 * Initialise the Google Cloud CLI if this has not been done.
   * `gcloud init`.
 * Log into Google Cloud:
   * `gcloud auth application-default login`.
+* Get credentials for the container:
+  * `gcloud container clusters get-credentials ticketing-dev`
 * Set the GCloud context:
   * `kubectl config get-contexts`
   * `kubectl config use-context <gcloud-context-name>`
@@ -58,6 +63,50 @@ To use the Google Cloud context:
     It may change if we destroy the cluster and create it afresh. Run the following command to update the deployment
     files.
     * `./configure-deployment-context gcp`
+
+## Secrets
+
+A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such 
+information might otherwise be put in a Pod specification or in a container image. Using a Secret means that you don't
+need to include confidential data in your application code. See https://kubernetes.io/docs/concepts/configuration/secret/.
+
+
+### Creating Secrets
+
+For each new cluster, we need to create the secret(s) using the command(s) below. We do not want to store this in config
+files since it would expose the secrets.
+
+* `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf`
+
+The command above creates a secret key whose reference name is `"jwt-secret"` and with a key-value pair of 
+`"JWT_KEY=asdf"`.
+
+To list secrets, run `kubectl get secrets`.
+
+### Using Secrets
+
+The deployment files have configuration that gets the secrets from the cluster and include them as environment variables
+in the container. The containers then reference the variables in the code.
+
+Deployment configuration below creates an environment variable named `"JWT_KEY"` whose value shall come from secret by
+whose reference name is `"jwt-secret"` and whose key is `"JWT_KEY"`.
+```yaml
+    spec:
+      containers:
+        - name: auth
+          image: us.gcr.io/ticketing-dev-379109/auth
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+```
+
+Microservice source code:
+```javascript
+process.env.JWT_KEY
+```
 
 ## Running the application
 
