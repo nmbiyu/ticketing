@@ -26,6 +26,14 @@ valuable context related commands.
   * `kubectl config get-contexts`
   * `kubectl config use-context <minikube-context-name>`
 * Install ingress-nginx on Minikube: https://kubernetes.github.io/ingress-nginx/deploy/#minikube
+  * Verify that the controller pod is running. `kubectl get pods --namespace=ingress-nginx`. Here is example output.
+    ```
+     $ kubectl get pods --namespace=ingress-nginx
+       NAME                                       READY   STATUS      RESTARTS       AGE
+       ingress-nginx-admission-create-xt5cs       0/1     Completed   0              5d22h
+       ingress-nginx-admission-patch-gp9cv        0/1     Completed   0              5d22h
+       ingress-nginx-controller-77669ff58-89575   1/1     Running     11 (63m ago)   5d22h
+    ```
 * Edit the `/etc/hosts` file to direct traffic to ticketing.dev to minikube.
   * `minikube ip`
   * Add the following to `/etc/hosts`: `<IP> ticketing.dev`
