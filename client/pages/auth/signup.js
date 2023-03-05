@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Router from 'next/router';
-import axios from "axios";
 import useRequest from "../../hooks/use-request";
 
 const SignUp = () => {
