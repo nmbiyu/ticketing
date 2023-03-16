@@ -2,8 +2,8 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import { validateRequest } from "../middlewear/validate-request";
-import { BadRequestError } from "../errors/bad-request-error";
+import { validateRequest } from "@nmbiyutickets/common";
+import { BadRequestError } from "@nmbiyutickets/common";
 import { User } from "../models/user";
 import { Password } from "../services/password";
 

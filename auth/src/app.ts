@@ -7,7 +7,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { signupRouter } from "./routes/signup";
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
-import { errorHandler } from "./middlewear/error-handler";
+import { errorHandler } from "@nmbiyutickets/common";
 
 const app = express();
 app.set('trust proxy', true); // Ingress nginx is our proxy. We need to tell Express to trust it.
