@@ -2,9 +2,10 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError, currentUser } from "@nmbiyutickets/common";
+import { currentUser } from "@nmbiyutickets/common";
 
 import { createTicketRouter } from "./routes/new";
+import { showTicketRouter } from "./routes/show";
 
 const app = express();
 app.set('trust proxy', true); // Ingress nginx is our proxy. We need to tell Express to trust it.
@@ -16,5 +17,6 @@ app.use(cookieSession({
 app.use(currentUser);
 
 app.use(createTicketRouter);
+app.use(showTicketRouter);
 
 export { app };
