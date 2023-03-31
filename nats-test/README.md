@@ -49,9 +49,9 @@ To get the project running, we need to do the following.
 
 Run the following command to access the monitoring dashboard.
 ``` 
-$ kubectl port-forward nats-depl-6fbfdd77c9-7ldng 8222:8222
-Forwarding from 127.0.0.1:4222 -> 4222
-Forwarding from [::1]:4222 -> 4222
+$ kubectl port-forward <pod-name> 8222:8222
+Forwarding from 127.0.0.1:8222 -> 8222
+Forwarding from [::1]:8222 -> 8222
 ```
 
 NATS monitoring can be accessed at http://localhost:8222/streaming. To view channels and their subscriptions, visit
