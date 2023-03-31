@@ -1,5 +1,7 @@
 import nats from 'node-nats-streaming';
 
+console.clear();
+
 const stan = nats.connect('ticketing', 'abc', {
     url: 'http://localhost:4222' // NATS server running in the k8s cluster.
 });
