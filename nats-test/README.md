@@ -37,7 +37,10 @@ To get the project running, we need to do the following.
     Forwarding from 127.0.0.1:4222 -> 4222
     Forwarding from [::1]:4222 -> 4222
     ```
-* Open a new terminal window and run the command `npm run publish` to run the `publisher.ts` script. See the scripts
-section in `package.json`.
-* Open a new terminal window and run the command `npm run listen` to run the `listener.ts` script. See the scripts
-section in `package.json`.
+* Run the publish and subscribe scripts.
+  * Open a new terminal window and run the command `npm run publish` to run the `publisher.ts` script. See the scripts
+  section in `package.json`.
+  * Open a new terminal window and run the command `npm run listen` to run the `listener.ts` script. See the scripts
+  section in `package.json`.
+  * Start up logs for both scripts have been cleared by calling `console.clear()`.
+  * Note that for both scripts, typing rs in the terminal tells `ts-node-dev` to restart the process.
