@@ -48,7 +48,7 @@ To get the project running, we need to do the following.
 ### Monitoring
 
 Run the following command to access the monitoring dashboard.
-``` 
+```
 $ kubectl port-forward <pod-name> 8222:8222
 Forwarding from 127.0.0.1:8222 -> 8222
 Forwarding from [::1]:8222 -> 8222
