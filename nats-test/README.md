@@ -44,3 +44,15 @@ To get the project running, we need to do the following.
   section in `package.json`.
   * Start up logs for both scripts have been cleared by calling `console.clear()`.
   * Note that for both scripts, typing rs in the terminal tells `ts-node-dev` to restart the process.
+
+### Monitoring
+
+Run the following command to access the monitoring dashboard.
+``` 
+$ kubectl port-forward nats-depl-6fbfdd77c9-7ldng 8222:8222
+Forwarding from 127.0.0.1:4222 -> 4222
+Forwarding from [::1]:4222 -> 4222
+```
+
+NATS monitoring can be accessed at http://localhost:8222/streaming. To view channels and their subscriptions, visit
+http://localhost:8222/streaming/channelsz?subs=1.
