@@ -21,11 +21,11 @@ spec:
               '4222',
               '-m',
               '8222',
-              '-hbi',
+              '-hbi', # How often NATS server will make a heartbeat request to each client. Set to 5 seconds in next line.
               '5s',
-              '-hbt',
+              '-hbt', # How long each client has to respond to a heartbeat request. Set to 5 seconds in next line.
               '5s',
-              '-hbf',
+              '-hbf', # Number of consecutive failures allowed before the NATS server deems the client as dead. Set to 2 in next line.
               '2',
               '-SD',
               '-cid',
