@@ -28,7 +28,7 @@ spec:
               '-hbf', # Number of consecutive failures allowed before the NATS server deems the client as dead. Set to 2 in next line.
               '2',
               '-SD',
-              '-cid',
+              '-cid', # Cluster id. Set to ticketing in next line.
               'ticketing'
             ]
 ---
