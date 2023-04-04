@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
-import nats from "node-nats-streaming";
 
 const start = async () => {
     if (!process.env.JWT_KEY) {
