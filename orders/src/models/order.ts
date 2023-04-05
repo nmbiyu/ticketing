@@ -8,7 +8,7 @@ interface OrderAttrs {
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
-    // This should have been of type TicketDoc but I could not call the build function as follows.
+    // FIXME This should have been of type TicketDoc but I could not call the build function as follows.
     // const ticket = await Ticket.findById(ticketId);
     // Order.build({
     //  ... other props
@@ -21,7 +21,7 @@ interface OrderDoc extends mongoose.Document {
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
-    // This should have been of type TicketDoc but I could not call the build function as follows.
+    // FIXME This should have been of type TicketDoc but I could not call the build function as follows.
     // const ticket = await Ticket.findById(ticketId);
     // Order.build({
     //  ... other props
