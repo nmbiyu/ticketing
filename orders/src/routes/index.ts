@@ -12,6 +12,4 @@ router.get('/api/orders', requireAuth, async (req: Request, res: Response) => {
     res.send(orders);
 });
 
-
-
 export { router as indexOrderRouter };
