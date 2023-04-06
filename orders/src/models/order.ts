@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { OrderStatus } from "@nmbiyutickets/common";
-import { TicketDoc } from "./ticket";
 
 export { OrderStatus };
 
