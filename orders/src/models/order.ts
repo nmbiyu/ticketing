@@ -27,6 +27,7 @@ interface OrderDoc extends mongoose.Document {
     //  ticket: ticket
     // })
     ticket: any;
+    version: number;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
