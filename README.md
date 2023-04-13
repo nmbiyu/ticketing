@@ -120,3 +120,16 @@ process.env.JWT_KEY
 
 * Navigate to the root of the project and run `skaffold dev`.
 * A test API can be accessed at http://ticketing.dev/api/users/currentuser.
+
+## Accessing mongo database
+
+It may be necessary to access the mongo database. To do so, run the `mongo` command on the pod running the mongo
+deployment to be accessed.
+
+* `kubectl get pods` to list all pods.
+* `kubectl exec -it <mongo-deployment-pod> mongo` opens a mongo shell.
+
+Here are a few useful commands.
+
+* show dbs;
+* use <db-name>;
