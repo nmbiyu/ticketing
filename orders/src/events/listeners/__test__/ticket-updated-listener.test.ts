@@ -55,3 +55,15 @@ it('acks the message', async () => {
 
     expect(msg.ack).toHaveBeenCalled();
 });
+
+it('does not call ack if the event version is greater than ticket.version + 1', async () => {
+    const { msg, data, listener, ticket } = await setup();
+
+    data.version = ticket.version + 2;
+
+    try {
+        await listener.onMessage(data, msg);
+    } catch (err) {}
+
+    expect(msg.ack).not.toHaveBeenCalled();
+});
