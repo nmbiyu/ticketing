@@ -34,6 +34,14 @@ build:
         dest: .
     docker:
       dockerfile: Dockerfile
+  - image: nmbiyu/expiration
+    context: expiration
+    sync:
+      manual:
+        - src: src/**/*.ts
+          dest: .
+    docker:
+      dockerfile: Dockerfile
   # Local build config for the minikube context
   local:
     push: false
