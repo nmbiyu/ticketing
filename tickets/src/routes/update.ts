@@ -12,10 +12,7 @@ import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
-// FIXME Fix error in method defintion.
-//  Argument type ValidationChain[] is not assignable to parameter type
-//  RequestHandler<core.ParamsDictionary, any, any, ParsedQs, Record<string, any>>
-router.put('/api/tickets/:id', requireAuth,
+router.put('/api/tickets/:id',
     [
         body('title')
             .not()
@@ -25,6 +22,7 @@ router.put('/api/tickets/:id', requireAuth,
             .isFloat({ gt: 0 })
             .withMessage('Price must be provided and must be greater than 0')
     ],
+    requireAuth,
     validateRequest,
     async (req: Request, res: Response) => {
     const ticket = await Ticket.findById(req.params.id);
