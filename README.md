@@ -84,7 +84,8 @@ need to include confidential data in your application code. See https://kubernet
 For each new cluster, we need to create the secret(s) using the command(s) below. We do not want to store this in config
 files since it would expose the secrets.
 
-* `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf`
+* `kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf`
+* `kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=<stripe_secret_key>`
 
 The command above creates a secret key whose reference name is `"jwt-secret"` and with a key-value pair of 
 `"JWT_KEY=asdf"`.
