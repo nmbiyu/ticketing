@@ -64,3 +64,15 @@ it('acks the message', async () => {
 
     expect(msg.ack).toHaveBeenCalled();
 });
+
+it('does not cancel an order whose status is complete', async () => {
+    const { listener, order, data, msg } = await setup();
+    order.set({ status: OrderStatus.Complete });
+    await order.save();
+
+    await listener.onMessage(data, msg);
+
+    expect(msg.ack).toHaveBeenCalled();
+    const updatedOrder = await Order.findById(order.id);
+    expect(updatedOrder!.status).toEqual(OrderStatus.Complete);
+});
