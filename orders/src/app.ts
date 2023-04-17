@@ -8,6 +8,7 @@ import { deleteOrderRouter } from "./routes/delete";
 import { indexOrderRouter } from "./routes/index";
 import { newOrderRouter } from "./routes/new";
 import { showOrderRouter } from "./routes/show";
+import { errorHandler } from "@nmbiyutickets/common";
 
 const app = express();
 app.set('trust proxy', true); // Ingress nginx is our proxy. We need to tell Express to trust it.
@@ -22,5 +23,6 @@ app.use(deleteOrderRouter);
 app.use(indexOrderRouter);
 app.use(newOrderRouter);
 app.use(showOrderRouter);
+app.use(errorHandler);
 
 export { app };

@@ -4,6 +4,7 @@ import { json } from 'body-parser';
 import cookieSession from "cookie-session";
 import { currentUser } from "@nmbiyutickets/common";
 import { createChargeRouter } from "./routes/new";
+import { errorHandler } from "@nmbiyutickets/common";
 
 const app = express();
 app.set('trust proxy', true); // Ingress nginx is our proxy. We need to tell Express to trust it.
@@ -15,5 +16,6 @@ app.use(cookieSession({
 app.use(currentUser);
 
 app.use(createChargeRouter);
+app.use(errorHandler);
 
 export { app };
