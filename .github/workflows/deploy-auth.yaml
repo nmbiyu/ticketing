@@ -12,7 +12,6 @@ jobs:
     env:
       IMAGE_NAME: auth
       PROJECT_ID: ticketing-dev-379109
-      GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
