@@ -45,7 +45,7 @@ jobs:
           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
 
       - name: Restart deployment
-        run: kubectl rollout restart deployment auth-depl
+        run: kubectl rollout restart deployment auth-depl -n default
 
 #      - name: Push Docker Image to Artifact Registry
 #        env:
