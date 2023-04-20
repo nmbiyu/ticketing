@@ -42,8 +42,7 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |-
-          run: |-
-            docker build --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} -t 'us.gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA' .
+          docker build --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} -t 'us.gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA' .
 
       # Push the Docker image to Google Container Registry
       - name: Publish
