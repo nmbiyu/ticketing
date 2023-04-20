@@ -42,12 +42,12 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |-
-          cd auth && docker build --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} -t us.gcr.io/${PROJECT_ID}/${SERVICE_NAME}:${GITHUB_SHA} .
+          cd auth && docker build -t us.gcr.io/${PROJECT_ID}/${SERVICE_NAME}:${GITHUB_SHA} .
 
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push 'us.gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA'
+          docker push 'us.gcr.io/${PROJECT_ID}/${SERVICE_NAME}:${GITHUB_SHA}'
 
       # Set up kustomize
       - name: Set up Kustomize
