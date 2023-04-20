@@ -46,12 +46,28 @@ valuable context related commands.
 ### Google cloud context
 
 To use the Google Cloud context:
+* Create the cluster if that has not already been done.
+  * Visit https://console.cloud.google.com
+  * On the hamburger menu, visit Kubernetes Engine / Clusters.
+  * Click on the Create Cluster button.
+  * Select the Standard cluster mode.
+  * Fill in the following cluster details.
+    * Name: ticketing-dev
+    * Location type: Zonal
+    * Zone: Use https://googlecloudplatform.github.io/region-picker/ to select the best zone.
+    * Specify default node locations: Leave this unchecked.
+    * Control plane version: Release channel.
+    * Release channel and version: Use defaults.
+  * In the menu on the left, click on NODE POOLS / default-pool. Use default values.
+  * Visit NODE POOLS / default-pool / Nodes
+    * Machine configuration
+      * Series: N1
+      * Machine type: g1-small
 * Install the gcloud CLI. https://cloud.google.com/sdk/docs/install
-* Create a Kubernetes cluster in Google Cloud.
+* Log into Google Cloud:
+  * `gcloud auth login`.
 * Initialise the Google Cloud CLI if this has not been done.
   * `gcloud init`.
-* Log into Google Cloud:
-  * `gcloud auth application-default login`.
 * Get credentials for the container:
   * `gcloud container clusters get-credentials ticketing-dev`
 * Set the GCloud context:

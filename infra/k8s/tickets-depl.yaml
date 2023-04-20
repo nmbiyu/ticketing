@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: nmbiyu/tickets
+          image: us.gcr.io/ticketing-dev-379109/tickets
           env:
             - name: NATS_CLIENT_ID # Use the pod's name as the NATS_CLIENT_ID.
               valueFrom:
