@@ -14,7 +14,7 @@ jobs:
     env:
       IMAGE_NAME: auth
       PROJECT_ID: ticketing-dev-379109
-      GOOGLE_SECRET_KEY: ${{ secrets.GKE_SA_KEY }}
+      GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
-          credentials_json: ${GOOGLE_SECRET_KEY}
+          credentials_json: ${GOOGLE_CREDENTIALS_JSON}
 
       - uses: google-github-actions/setup-gcloud@v1
         with:
