@@ -17,11 +17,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
+
       - uses: google-github-actions/setup-gcloud@v1
         with:
-          service_account_key: ${{ secrets.GKE_SA_KEY }}
-          projectId: ${{ env.PROJECT_ID }}
-          export_default_credentials: true
+          version: '>= 363.0.0'
 
       - name: Build Docker Image
         run: docker build -t $IMAGE_NAME:latest auth
