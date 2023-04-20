@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: expiration
-          image: nmbiyu/expiration
+          image: us.gcr.io/ticketing-dev-379109/expiration
           env:
             - name: NATS_CLIENT_ID # Use the pod's name as the NATS_CLIENT_ID.
               valueFrom:
