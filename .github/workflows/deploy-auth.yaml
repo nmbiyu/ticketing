@@ -24,6 +24,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
+          credentials_json: ${{ GKE_SA_KEY }}
 
       - uses: google-github-actions/setup-gcloud@v1
         with:
