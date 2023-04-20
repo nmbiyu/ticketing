@@ -1,38 +1,30 @@
-name: deploy-manifests
+name: deploy-auth
 
 on:
   push:
     branches:
       - master
-    paths:
-      - 'infra/**'
-
-env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER:  ticketing-dev  # Add your cluster name here.
-  GKE_ZONE: us-central1-c # Add your cluster zone here.
 
 jobs:
   build:
+    name: Build and Push to GCP
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: auth
+      PROJECT_ID: ticketing-dev-379109
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      # Setup gcloud CLI
-      - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
-          service_account_key: ${{ secrets.GKE_SA_KEY }}
-          project_id: ${{ secrets.GKE_PROJECT }}
+          service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
 
-      # Get the GKE credentials so that we can deploy to the cluster
-      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+      - uses: google-github-actions/setup-gcloud@v1
         with:
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
-          credentials: ${{ secrets.GKE_SA_KEY }}
+          version: '>= 363.0.0'
 
-      # Deploy the manifests
-      - name: Deploy
-        run: |-
-          kubectl apply -f infra/k8s
-          kubectl apply -f infra/k8s-prod
+      - run: kubectl apply -f infra/k8s
