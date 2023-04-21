@@ -10,7 +10,7 @@ jobs:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: auth
+      IMAGE_NAME: us.gcr.io/ticketing-dev-379109/auth:latest
       PROJECT_ID: ticketing-dev-379109
     steps:
       - name: Checkout
