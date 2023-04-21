@@ -10,7 +10,7 @@ jobs:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: nmbiyu/auth
+      IMAGE_NAME: auth
       PROJECT_ID: ticketing-dev-379109
     steps:
       - name: Checkout
