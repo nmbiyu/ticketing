@@ -1,4 +1,4 @@
-name: deploy-expiration
+name: deploy-tickets
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: expiration
+      IMAGE_NAME: tickets
       PROJECT_ID: ticketing-dev-379109
     steps:
       - name: Checkout
@@ -28,7 +28,7 @@ jobs:
           version: '>= 363.0.0'
 
       - name: Build Docker Image
-        run: docker build -t $IMAGE_NAME:latest expiration
+        run: docker build -t $IMAGE_NAME:latest tickets
 
       - name: Configure Docker Client
         run: |-
@@ -45,7 +45,7 @@ jobs:
           docker push us.gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
 
 #      - name: Restart deployment
-#        run: kubectl rollout restart deployment expiration-depl -n default
+#        run: kubectl rollout restart deployment tickets-depl -n default
 
 
 #      - name: Push Docker Image to Artifact Registry
