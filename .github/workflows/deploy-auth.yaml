@@ -48,7 +48,7 @@ jobs:
         run: kubectl rollout restart deployment auth-depl -n default
 
 
-`#      - name: Push Docker Image to Artifact Registry
+#      - name: Push Docker Image to Artifact Registry
 #        env:
 #          GIT_TAG: v0.1.0
 #        run: |-
