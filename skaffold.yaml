@@ -49,11 +49,11 @@ build:
     docker:
       dockerfile: Dockerfile
   # Local build config for the minikube context
-  #local:
-  #  push: false
+  local:
+    push: false
   # Google cloud config
-  googleCloudBuild:
-    projectId: ticketing-dev-379109
+  #googleCloudBuild:
+  #  projectId: ticketing-dev-379109
 manifests:
   rawYaml:
   - ./infra/k8s/*
