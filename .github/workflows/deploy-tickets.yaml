@@ -15,6 +15,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'tickets/**'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
