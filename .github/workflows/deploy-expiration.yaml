@@ -13,6 +13,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'expiration/**'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
