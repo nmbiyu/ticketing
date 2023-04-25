@@ -147,5 +147,5 @@ deployment to be accessed.
 
 Here are a few useful commands.
 
-* show dbs;
-* use <db-name>;
+* `show dbs;`
+* `use <db-name>;`
