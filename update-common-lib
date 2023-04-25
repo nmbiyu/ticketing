@@ -5,5 +5,5 @@ do
   pushd "$service" || exit
   echo "Updating @nmbiyutickets/common in ${service} service..."
   npm update @nmbiyutickets/common
-  popd
+  popd || exit
 done
