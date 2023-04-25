@@ -30,11 +30,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup gcloud CLI
-        uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
-          service_account_key: ${{ secrets.GKE_SA_KEY }}
-          project_id: ${{ secrets.GKE_PROJECT }}
+          service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+
+      - uses: google-github-actions/setup-gcloud@v1
+        with:
+          version: '>= 363.0.0'
 
       - name: Configure Docker to use the gcloud command-line tool as a credential helper for authentication
         run: |-
