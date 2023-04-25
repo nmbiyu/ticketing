@@ -2,7 +2,7 @@
 services=("auth" "expiration" "orders" "payments" "tickets")
 for service in "${services[@]}"
 do
-  pushd "$service"
+  pushd "$service" || exit
   echo "Updating @nmbiyutickets/common in ${service} service..."
   npm update @nmbiyutickets/common
   popd
