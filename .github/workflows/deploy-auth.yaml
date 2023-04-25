@@ -67,7 +67,7 @@ jobs:
 
       - name: Deploy the Docker image to the GKE cluster
         run: |-
-          pushd ../../infra/environments/prod &&
+          pushd infra/environments/prod &&
           kubectl kustomize edit set image us.gcr.io/PROJECT_ID/IMAGE:TAG=us.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           kubectl kustomize build infra/environments/prod | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
