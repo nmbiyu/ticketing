@@ -1,20 +1,34 @@
-name: deploy-manifests
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: deploy-auth
 
 on:
   push:
     branches:
-      - dev
+      - master
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: ticketing-dev    # Add your cluster name here.
+  GKE_ZONE: us-central1-c   # Add your cluster zone here.
+  DEPLOYMENT_NAME: auth-depl # Add your deployment name here.
+  IMAGE: auth
 
 jobs:
-  build:
-    name: Build and Push to GCP
+  setup-build-publish-deploy:
+    name: Apply Manifests
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: us.gcr.io/ticketing-dev-379109/auth:latest
-      PROJECT_ID: ticketing-dev-379109
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -23,8 +37,25 @@ jobs:
           service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
 
-      - uses: google-github-actions/setup-gcloud@v1
+      - name: Set up gCloud
+        uses: google-github-actions/setup-gcloud@v1
         with:
           version: '>= 363.0.0'
 
-      - run: kubectl apply -f infra/k8s
+      - name: Get the GKE credentials
+        uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
+
+      - name: Set up Kustomize
+        run: |-
+          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+          chmod u+x ./kustomize
+
+      - name: Apply Manifests
+        run: |-
+          pushd infra/environments/prod
+          ../../../kustomize build | kubectl apply -f -
+          popd
