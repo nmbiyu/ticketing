@@ -61,13 +61,14 @@ jobs:
         run: |-
           docker build \
             --tag "us.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+            --tag "us.gcr.io/$PROJECT_ID/$IMAGE:latest" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             client
 
       - name: Publish Docker Image to Google Container Registry
         run: |-
-          docker push "us.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+          docker push - a "us.gcr.io/$PROJECT_ID/$IMAGE"
 
       - name: Set up Kustomize
         run: |-
@@ -79,6 +80,7 @@ jobs:
           pushd infra/environments/prod
           ../../../kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ../../../kustomize build | kubectl apply -f -
+          kubectl rollout restart deployment $DEPLOYMENT_NAME
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
           popd
