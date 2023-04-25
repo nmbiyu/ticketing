@@ -69,6 +69,5 @@ jobs:
         run: |-
           pushd infra/environments/prod &&
           ls -l &&
-          kubectl kustomize . &&
-          kubectl kustomize set image us.gcr.io/PROJECT_ID/IMAGE:TAG=us.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          kubectl kustomize edit set image us.gcr.io/PROJECT_ID/IMAGE:TAG=us.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           popd
