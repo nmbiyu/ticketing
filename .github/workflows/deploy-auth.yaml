@@ -37,7 +37,8 @@ jobs:
           service_account: 'github-service-account@ticketing-dev-379109.iam.gserviceaccount.com'
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
 
-      - uses: google-github-actions/setup-gcloud@v1
+      - name: Set up gCloud
+        uses: google-github-actions/setup-gcloud@v1
         with:
           version: '>= 363.0.0'
 
